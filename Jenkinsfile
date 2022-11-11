@@ -35,6 +35,7 @@ pipeline {
         }
         stage('Deployment') {
             steps {
+                sh 'mvn release:clean'
                 sh 'mvn deploy -Dmaven.test.skip=true'
             }
         }
