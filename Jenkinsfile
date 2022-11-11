@@ -28,7 +28,7 @@ pipeline {
             }
         }
         
-        stage("docker compose") {
+        stage("docker compose up") {
             steps {
                 sh "sudo docker compose up -d";
             }
@@ -36,6 +36,12 @@ pipeline {
         stage('Deployment') {
             steps {
                 sh 'mvn deploy -Dmaven.test.skip=true'
+            }
+        }
+
+        stage("docker compose down") {
+            steps {
+                sh "sudo docker compose down";
             }
         }
     }
